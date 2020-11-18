@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: cego
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - type: bind
+        source: "$DUMP_SOURCE"
+        target: "$DUMP_TARGET"
+      - type: volume
+        source: persistance
+        target: $PERSISTANCE_TARGET
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - db
+    ports:
+      - 8000:80
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+
+volumes:
+  persistance:
