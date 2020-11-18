@@ -1,4 +1,5 @@
 import fs from "fs";
+import jp from "jsonpath";
 const path = require("path");
 
 export const outputFile = path.join(
@@ -19,15 +20,47 @@ export const writeToFile = async (data) => {
 
   try {
     if (fs.existsSync(outputFile)) {
-      const existingDataFromFile = await fs.readFileSync(outputFile);
-      dataList = JSON.parse(existingDataFromFile);
+      dataList = await getJsonFromFile();
     }
 
     dataList.push(data);
     await fs.writeFileSync(outputFile, JSON.stringify(dataList));
+    let verif = await verifyDataHasBeenWritten(data);
+    console.log("VERIFICATION: ", verif);
   } catch (err) {
     console.error(err);
   }
 
   return { message: "Data successfully written" };
+};
+
+/**
+ * Checks data integrity and whether the requested data is written to the file or not.
+ * Using json path we find the entry in the file where the data id equals the written data id.
+ * @param {JSON} data  JSON data that needs to be verified that has been correctly added to the file.
+ */
+export const verifyDataHasBeenWritten = async (data) => {
+  if (data === null) {
+    return false;
+  }
+  if (!fs.existsSync(outputFile)) {
+    return false;
+  }
+
+  if (fs.existsSync(outputFile)) {
+    const dataFromFile = await getJsonFromFile();
+    let matchingUser = jp.query(dataFromFile, `$[?(@['id'] == '${data.id}')]`)[0];
+    return (
+      matchingUser != null &&
+      matchingUser.firstName === data.firstName &&
+      matchingUser.lastName === data.lastName &&
+      matchingUser.email === data.email
+    );
+  }
+  return false;
+};
+
+const getJsonFromFile = async () => {
+  const existingDataFromFileRaw = await fs.readFileSync(outputFile);
+  return JSON.parse(existingDataFromFileRaw);
 };
