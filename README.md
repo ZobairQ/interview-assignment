@@ -1,3 +1,4 @@
+[![time tracker](https://wakatime.com/badge/github/ZobairQ/interview-assignment.svg)](https://wakatime.com/badge/github/ZobairQ/interview-assignment)
 # Job interview assignment
 
 We kindly ask you to solve the task below. By solving and submitting this assignment you provide us with insights in how you solve real-world problems. What we will be looking at are topics such as: choice of technology, structuring of code, use of VCS, selection of 3rd party libraries, documentation etc.
