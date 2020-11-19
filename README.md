@@ -74,7 +74,7 @@ Here is a quick how to do a docker login.
 docker login --username GITHUB_USERNAME --password PERSONAL_ACCESS_TOKEN
 ```
 
-You should now be ready to pull the images.
+You should now be ready to pull the image.
 
 If you do not wish to pull the pre-build image,
 please add the following under the application service in the docker-compose.yaml file in order to build the image yourself.
