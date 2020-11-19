@@ -1,4 +1,5 @@
 [![time tracker](https://wakatime.com/badge/github/ZobairQ/interview-assignment.svg)](https://wakatime.com/badge/github/ZobairQ/interview-assignment)
+
 # Job interview assignment
 
 We kindly ask you to solve the task below. By solving and submitting this assignment you provide us with insights in how you solve real-world problems. What we will be looking at are topics such as: choice of technology, structuring of code, use of VCS, selection of 3rd party libraries, documentation etc.
@@ -77,6 +78,12 @@ docker login --username GITHUB_USERNAME --password PERSONAL_ACCESS_TOKEN
 
 You should now be ready to pull the image.
 
+Navigate to the root of the project where `docker-compose.yaml` is found and run following command.
+
+    docker-compose up
+
+If you need to do any modification regarding the setup, use the .env file to tweak the settings to your needs.
+
 If you do not wish to pull the pre-build image,
 please add the following under the application service in the docker-compose.yaml file in order to build the image yourself.
 
@@ -145,3 +152,13 @@ If everything went well, then you should be prompted with following
 ```
 
 You can find the file where the data has been written in under the `output folder` named `output.json`
+
+To verify the output file inside docker you can login into the docker container by following 
+
+    docker exec -t graphql-server /bin/sh
+
+Once you are logged in you can execute following
+
+    cat /root/output/output.json
+
+It should now show you content of the output.json file that the application has written into.
