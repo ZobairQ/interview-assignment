@@ -5,6 +5,7 @@ LABEL maintainer="ZobairQ <github/zobairQ>"
 ENV HOME = /root
 
 WORKDIR /root
+
 COPY . .
 
 RUN npm install
