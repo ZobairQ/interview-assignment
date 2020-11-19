@@ -1,5 +1,6 @@
 import fs from "fs";
 import jp from "jsonpath";
+require("regenerator-runtime/runtime");
 const path = require("path");
 
 export const outputFile = path.join(

@@ -1,7 +1,6 @@
 import app from "./server/server";
 import { PORT } from "./config/serverConfig";
 import sequelize from "./models";
-
 try {
   sequelize.authenticate().then(() => {
     console.log("Connection has been established successfully.");
