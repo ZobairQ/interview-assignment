@@ -2,9 +2,8 @@ version: "3"
 
 services:
   application:
-    build:
-      context: .
-      dockerfile: .docker/application.Dockerfile
+    container_name: graphql-server
+    image: docker.pkg.github.com/zobairq/interview-assignment/graphql-server:latest
     ports:
       - "4000:4000"
     depends_on:
@@ -18,6 +17,7 @@ services:
       DIALECT: $DIALECT
 
   mysql:
+    container_name: mysql
     image: mysql:8.0
     ports:
       - "3306:3306"
@@ -34,6 +34,7 @@ services:
         target: $PERSISTANCE_TARGET
 
   phpmyadmin:
+    container_name: phpmyadmin
     image: phpmyadmin/phpmyadmin
     depends_on:
       - mysql
