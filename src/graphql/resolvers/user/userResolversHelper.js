@@ -32,7 +32,7 @@ export const mutationWriteAndDeleteUser = async (_, { id }) => {
         message:
           "User has been successfully written to output.json and row for id: " +
           user.id +
-          " will is now deleted",
+          " is now deleted",
       };
     }
   } catch (error) {
