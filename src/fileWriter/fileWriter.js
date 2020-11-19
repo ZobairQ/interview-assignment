@@ -19,7 +19,7 @@ export const writeToFile = async (data) => {
   let dataList = [];
 
   try {
-    if (fs.existsSync(outputFile)) {
+    if (await fs.existsSync(outputFile)) {
       dataList = await getJsonFromFile();
     }
 
@@ -41,11 +41,11 @@ export const verifyDataHasBeenWritten = async (data) => {
   if (data === null) {
     return false;
   }
-  if (!fs.existsSync(outputFile)) {
+  if (await !fs.existsSync(outputFile)) {
     return false;
   }
 
-  if (fs.existsSync(outputFile)) {
+  if (await fs.existsSync(outputFile)) {
     const dataFromFile = await getJsonFromFile();
     let matchingUser = jp.query(
       dataFromFile,

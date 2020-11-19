@@ -4,7 +4,9 @@
   "description": "We kindly ask you to solve the task below. By solving and submitting this assignment you provide us with insights in how you solve real-world problems. What we will be looking at are topics such as: choice of technology, structuring of code, use of VCS, selection of 3rd party libraries, documentation etc.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node ./src/index.js",
+    "build": "babel src -d build",
+    "start": "babel-node ./build/index.js",
+    "dev": "nodemon --ignore 'output/' --ignore 'node_modules/' --ignore 'package-lock.json' --exec babel-node  ./src/index.js",
     "test": "jest"
   },
   "repository": {

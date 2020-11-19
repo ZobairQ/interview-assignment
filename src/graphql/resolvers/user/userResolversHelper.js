@@ -22,9 +22,9 @@ export const mutationWriteAndDeleteUser = async (_, { id }) => {
           "The user you have searched for is not found. He might have been already deleted",
       };
     }
-    writeToFile(user);
+    await writeToFile(user);
 
-    if (verifyDataHasBeenWritten(user)) {
+    if (await verifyDataHasBeenWritten(user)) {
       // user has been successfully written. We can now safely delete the entry.
       await user.destroy();
       return {

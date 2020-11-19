@@ -1,7 +1,23 @@
 version: "3"
 
 services:
-  db:
+  application:
+    build:
+      context: .
+      dockerfile: .docker/application.Dockerfile
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mysql
+    environment:
+      PORT: $PORT
+      HOST: $HOST
+      DATABASE_USER: $DATABASE_USER
+      DATABASE_PASSWORD: $DATABASE_PASSWORD
+      DATABASE_NAME: $DATABASE_NAME
+      DIALECT: $DIALECT
+
+  mysql:
     image: mysql:8.0
     ports:
       - "3306:3306"
@@ -20,7 +36,7 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     depends_on:
-      - db
+      - mysql
     ports:
       - 8000:80
     environment:
