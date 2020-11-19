@@ -106,7 +106,7 @@ query {
 
 Paste the query and press the "play-iconed" button.
 
-You should know be able to see list of all the users that are in the database.
+You should now be able to see list of all the users that are in the database.
 
 The docker-compose actually starts 3 containers, mysql, the graphql server and phpmyadmin.
 You can visit `localhost:8000` to then enter `root` as username and `root` as pssword to login and verify that the database dump is loaded correctly. You can also enter the mysql container by
