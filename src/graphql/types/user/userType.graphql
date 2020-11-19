@@ -5,10 +5,15 @@ type User {
   email: String!
 }
 
+type Status {
+  code: String!
+  message: String!
+}
+
 type Query {
   users: [User]
 }
 
 type Mutation {
-  writeAndDeleteUser(id: ID!): User!
+  writeAndDeleteUser(id: ID!): Status!
 }

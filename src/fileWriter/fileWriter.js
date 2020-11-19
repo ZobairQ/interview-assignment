@@ -25,8 +25,6 @@ export const writeToFile = async (data) => {
 
     dataList.push(data);
     await fs.writeFileSync(outputFile, JSON.stringify(dataList));
-    let verif = await verifyDataHasBeenWritten(data);
-    console.log("VERIFICATION: ", verif);
   } catch (err) {
     console.error(err);
   }
@@ -49,7 +47,10 @@ export const verifyDataHasBeenWritten = async (data) => {
 
   if (fs.existsSync(outputFile)) {
     const dataFromFile = await getJsonFromFile();
-    let matchingUser = jp.query(dataFromFile, `$[?(@['id'] == '${data.id}')]`)[0];
+    let matchingUser = jp.query(
+      dataFromFile,
+      `$[?(@['id'] == '${data.id}')]`
+    )[0];
     return (
       matchingUser != null &&
       matchingUser.firstName === data.firstName &&

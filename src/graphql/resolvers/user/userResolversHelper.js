@@ -8,11 +8,40 @@ export const queryFetchAllUsers = async () => {
 };
 
 export const mutationWriteAndDeleteUser = async (_, { id }) => {
-  const user = await User.findOne({ where: { id } });
-  writeToFile(user);
-  if (verifyDataHasBeenWritten(data)) {
-    // Data has been successfully written. We can now safely delete the entry.
-    
+  const status = {
+    code: "400",
+    message: "Data was either not written or deleted correctly",
+  };
+
+  try {
+    const user = await User.findOne({ where: { id } });
+    if (user === null) {
+      return {
+        code: "400",
+        message:
+          "The user you have searched for is not found. He might have been already deleted",
+      };
+    }
+    writeToFile(user);
+
+    if (verifyDataHasBeenWritten(user)) {
+      // user has been successfully written. We can now safely delete the entry.
+      await user.destroy();
+      return {
+        code: "200",
+        message:
+          "User has been successfully written to output.json and row for id: " +
+          user.id +
+          " will is now deleted",
+      };
+    }
+  } catch (error) {
+    console.error(error);
+    return {
+      code: 500,
+      message: error,
+    };
   }
-  return user;
+
+  return status;
 };
